@@ -38,12 +38,14 @@ public class ShortenUrlController {
 	@PostMapping("")
 	public ResponseEntity<DefaultResponse> addShortenUrl(@RequestBody final AddShortenUrlForm asuf){
 
-		if(asuf.getOrginUrl() == null) {
+		System.out.println("addshorturlr");
+
+		if(asuf.getOriginUrl() == null) {
 			throw new RuntimeException();
 		}
 
-		System.out.println(asuf.getOrginUrl());
-		ShortenUrl shortenUrl = new ShortenUrl(asuf.getOrginUrl());
+		System.out.println(asuf.getOriginUrl());
+		ShortenUrl shortenUrl = new ShortenUrl(asuf.getOriginUrl());
 		ShortenUrlResponseData shortenUrlResponseData = new ShortenUrlResponseData();
 		shortenUrlResponseData.setShortIdx(shortenUrlService.addOriginUrl(shortenUrl));
 		

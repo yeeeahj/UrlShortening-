@@ -1,74 +1,108 @@
-    <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<!DOCTYPE>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 <head>
-    <script src="https://code.jquery.com/jquery.min.js"></script>
-    <style>
-        .back {
-            background-image: url('KakaoTalk_20170730_015138729.png');
-            background-size: 100%;
-        }
-        .title_img{
-            margin-top: 89.8px;
-            margin-left:63.2px;
-            margin-right: 62.8px;
-
-        }
-        .middle_input {
-            width: 65%;
-            height: 15.6%;
-            font-family: AppleSDGothicNeoI;
-            font-size: 35px;
-            line-height: 1.64;
-            text-align: center;
-            color: #7c7c7c;
-            margin-left: 17.3%;
-            margin-top:13.8%;
-            margin-right: 17.2%;
-        }
-        .bottom_img{
-            width:100%;
-            height:27%;
-            margin: 0 auto;
-            margin-top: 15%;
-            margin-left: 17.6%;
-            margin-right: 16%;
-        }
-        .center{
-            width: 70%;
-        }
-
-        .a{
-            margin: 0 auto;
-            padding-bottom: 5%;
-        }
-    </style>
+    <%@include file="../include/header.jsp" %>
+    <title>Now Showing</title>
 </head>
-<body class="back">
-<div class="title_img">
-    <img src="logo.png" width="100%"/>
-</div>
-<div class="middle_input">
-    감정약꾹은<br/>
-    바쁜 일상에서 자신의 감정을<br/>
-    돌보기 힘든 사람들을 대상으로,<br/>
-    그들의 감정에 처방전을 제공하는<br/>
-    라이트하고 재미있는 서비스입니다.
-</div>
-<div class="bottom_img">
-    <div class="a">
-        <img src="main_button-01.png" class="center" id="move"/>
+
+<body>
+
+<%@include file="../include/menu.jsp" %>
+<!-- Page Header -->
+<!-- Set your background image for this header on the line below. -->
+<header class="intro-header" style="background-image: url('/resources/img/post-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1>Now Showing</h1>
+                    <hr class="small">
+                    <span class="subheading">More Faster, More Simply, Enjoy the movie !</span>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="row">
+                <div class="col-xs-4">
+                    <input type="text" name="keyword" id="keywordInput" value="${ cri.keyword }">
+                    <button id="searchBtn">변환</button>
+                </div>
+                <div class="col-xs-8">
+                    <h2 class="post-title">미녀와 야수</h2>
+                    <hr style="border-color: black">
+                    <h3 class="post-subtitle">
+                        스크린에 의해 재탄생한 세기의 걸작!
+                        전 세계가 기다려온 가장 아름다운 이야기!
+                    </h3>
+                    <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on September 24, 2014</p>
+                </div>
+            </div>
+        </div>
+    </div> <!-- /.row -->
+</div><!-- /.container -->
+
+<%@include file="../include/footer.jsp" %>
+
 <script>
-    $(function(){
-        $('#move').click(function(){
-            var url = "picture";
-            location.href = url;
+
+    $(document).ready(function () {
+        // 검색버튼 이벤트 등록
+        $("#searchBtn").on("click", function (event) {
+            self.location = "listPage"
+                + "?page=1"
+                + "&searchType=" + $("select option:selected").val()
+                + "&keyword=" + $("#keywordInput").val();
+        });
+
+        // 글작성 버튼 이벤트 등록
+        $("#newBtn").on("click", function (event) {
+            self.location = "register";
         });
     });
+
+    var result = '${msg}';
+
+    // 컨트롤러에서 보낸 msg가 SUCCESS라면 아래와 같은 팝업창을 띄운다.
+    if (result == 'SUCCESS') {
+        alert("처리가 완료되었습니다.");
+    }
+
+    $("#changeBtn").on("click", function(){
+        var originUrl = $("#originUrl").val();
+
+        $.ajax({
+            type: 'post',
+            url: '/shortenUrl/',
+            headers: {
+                "Content-Type": "application/json",
+                "X-HTTP-Method-Override": "POST" },
+            data: JSON.stringify({originUrl: originUrl}),
+            dataType: 'text',
+            success: function(result){
+                console.log("result : " + result);
+
+                if(result == 'SUCCESS'){
+                    alert("수정되었습니다.");
+                    getPage("/replies/" + bno + "/" + replyPage);
+                }
+            }});
+    });
+
 </script>
+
+
+
 </body>
+
 </html>
 

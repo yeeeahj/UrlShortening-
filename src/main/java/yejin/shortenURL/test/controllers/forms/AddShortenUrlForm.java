@@ -6,7 +6,7 @@ package yejin.shortenURL.test.controllers.forms;
  */
 public class AddShortenUrlForm {
 	
-	private String orginUrl;
+	private String originUrl;
 	
 	/**
 	 * Constructor.
@@ -17,14 +17,14 @@ public class AddShortenUrlForm {
 	public AddShortenUrlForm(String originUrl){
 
 
-		this.orginUrl = originUrl;
+		this.originUrl = originUrl;
 	}
 	
-	public String getOrginUrl() {
-		return orginUrl;
+	public String getOriginUrl() {
+		return originUrl;
 	}
-	public void setOrginUrl(String orginUrl) {
-		this.orginUrl = orginUrl;
+	public void setOriginUrl(String originUrl) {
+		this.originUrl = originUrl;
 	}
 	
 	
