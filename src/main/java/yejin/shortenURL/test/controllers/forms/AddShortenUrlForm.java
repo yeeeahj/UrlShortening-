@@ -15,8 +15,6 @@ public class AddShortenUrlForm {
 		
 	}
 	public AddShortenUrlForm(String originUrl){
-
-
 		this.originUrl = originUrl;
 	}
 	

@@ -48,6 +48,11 @@ public class AntilogarithmConversion {
 	 */
 	public static long toDecimal(String shortenIdx) {
 		long longIdx =0;
+
+		System.out.println("asasdasdasdasdasdasd");
+		System.out.println("asasdasdasdasdasdasd");
+		System.out.println("asasdasdasdasdasdasd");
+
 		for(int degree = 0 ; degree <shortenIdx.length() ; degree++){
 			char cipher = shortenIdx.charAt(degree);
 			int cipherNum=0;

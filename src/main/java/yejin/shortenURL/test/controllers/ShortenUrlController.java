@@ -40,10 +40,14 @@ public class ShortenUrlController {
 	@ResponseBody
 	public ResponseEntity<DefaultResponse> addShortenUrl(@RequestBody final AddShortenUrlForm asuf){
 
-		System.out.println("addshorturlr");
 
-		if(asuf.getOriginUrl() == null) {
-			throw new RuntimeException();
+		System.out.println(asuf.getOriginUrl());
+		System.out.println(asuf.getOriginUrl());
+		System.out.println(asuf.getOriginUrl());
+		System.out.println(asuf.getOriginUrl());
+
+		if(asuf.getOriginUrl() == "") {
+			throw new NotInputException("EMPTY");
 		}
 
 		System.out.println(asuf.getOriginUrl());
@@ -62,18 +66,7 @@ public class ShortenUrlController {
 			throw new RangeOverException("This ShortenUrl is not Exist.");
 		}
 
-		try {
-			URI uri = new URI(shortenUrl.getOriginUrl());
-
-			System.out.println(uri.normalize());
-			System.out.println(uri.normalize());
-			System.out.println(uri.normalize());
-			System.out.println(uri.normalize());
-
-			return "redirect:" + uri.normalize();
-		} catch (Exception e) {
-			throw new RuntimeException();
-		}
+		return "redirect:" + shortenUrl.getOriginUrl();
 	}
 	
 }

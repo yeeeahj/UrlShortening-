@@ -21,14 +21,10 @@
                     <input type="text" name="keyword" id="originUrl" value="${ cri.keyword }">
                     <button id="changeBtn">변환</button>
                 </div>
-                <div class="col-xs-8">
-                    <h2 class="post-title">title</h2>
-                    <label id="check"></label>
-                    <hr style="border-color: black">
-                    <h3 class="post-subtitle" id="shortenUrl">
-                        ㅇㅇㅇㅇㅇㅇㅇ
-                    </h3>
-                    <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on September 24, 2014</p>
+                <!-- Main Content -->
+                <h4>${ exception }</h4>
+
+
                 </div>
             </div>
         </div>
