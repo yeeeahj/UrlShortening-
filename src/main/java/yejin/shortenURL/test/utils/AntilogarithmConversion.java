@@ -2,6 +2,8 @@ package yejin.shortenURL.test.utils;
 
 import java.util.Stack;
 
+import yejin.shortenURL.test.commons.BadInputException;
+
 public class AntilogarithmConversion {
 
 	private static final int RADIX = 62;
@@ -42,8 +44,9 @@ public class AntilogarithmConversion {
 	/**
 	 * Convert from 62 to 10.
 	 * @param shortenIdx
+	 * 
 	 */
-	public static long toDecimal(String shortenIdx){
+	public static long toDecimal(String shortenIdx) {
 		long longIdx =0;
 		for(int degree = 0 ; degree <shortenIdx.length() ; degree++){
 			char cipher = shortenIdx.charAt(degree);
@@ -56,7 +59,7 @@ public class AntilogarithmConversion {
 			}else if(97<=cipher && cipher <122){
 				cipherNum = cipher-87;
 			}else{
-				System.out.println("Wrong Url");
+				throw new BadInputException();
 			}
 			longIdx += cipherNum * (int)Math.pow(RADIX, shortenIdx.length()-degree-1);
 		}

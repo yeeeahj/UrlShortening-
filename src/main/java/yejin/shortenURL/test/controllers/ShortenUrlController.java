@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
+import yejin.shortenURL.test.commons.NotInputException;
+import yejin.shortenURL.test.commons.RangeOverException;
 import yejin.shortenURL.test.controllers.forms.AddShortenUrlForm;
 import yejin.shortenURL.test.controllers.responses.DefaultResponse;
 import yejin.shortenURL.test.controllers.responses.Data.ShortenUrlResponseData;
@@ -39,7 +41,7 @@ public class ShortenUrlController {
 	public ResponseEntity<DefaultResponse> addShortenUrl(@RequestBody final AddShortenUrlForm asuf){
 
 		if(asuf.getOrginUrl() == null) {
-			throw new RuntimeException();
+			throw new NotInputException("Please input your LongUrl");
 		}
 
 		System.out.println(asuf.getOrginUrl());
@@ -55,7 +57,7 @@ public class ShortenUrlController {
 	public String getOriginUrl(@PathVariable("idx") final long idx){
 		ShortenUrl shortenUrl = shortenUrlService.getOriginUrl(idx);
 		if(shortenUrl == null){
-
+			throw new RangeOverException("This ShortenUrl is not Exist.");
 		}
 		
 		return "redirect:"+shortenUrl.getOriginUrl();

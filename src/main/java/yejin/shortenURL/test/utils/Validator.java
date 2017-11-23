@@ -2,6 +2,9 @@ package yejin.shortenURL.test.utils;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.regex.Pattern;
+
+import yejin.shortenURL.test.commons.UrlAvailableException;
 
 /**
  * Created by ByeongChan on 2017. 11. 23..
@@ -9,6 +12,13 @@ import java.net.URL;
 public class Validator {
 
     static final String hostName = "localhost";
+	static String regex ="^(https?:\\/\\/)?"
+			+"((([a-z\\d](([a-z\\d-]*[a-z\\d])|([¤¡-ÆR]))*)\\.)+[a-z]{2,}|"
+			+"((\\d{1,3}\\.){3}\\d{1,3}))"
+			+"(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*"
+			+"(\\?[;&a-z\\d%_.~+=-]*)?"
+			+"(\\#[-a-z\\d_]*)?$";
+
 
     public static void validate(String originUrl) {
         URL tempUrl;
@@ -17,9 +27,9 @@ public class Validator {
 
             tempUrl = new URL(originUrl);
 
-            if (!tempUrl.getProtocol().equals("http") || !tempUrl.getProtocol().equals("https")) {
+            if (!tempUrl.getProtocol().equals("http") && !tempUrl.getProtocol().equals("https")) {
 
-                throw new RuntimeException();
+        		throw new UrlAvailableException("This URL is not vailable.");
             }
 
         } catch (MalformedURLException e) {
@@ -27,7 +37,7 @@ public class Validator {
             try {
                 tempUrl = new URL("http://" + originUrl);
             } catch (MalformedURLException e2) {
-                throw new RuntimeException();
+        		throw new UrlAvailableException("This URL is not vailable.");
             }
         }
 
@@ -35,8 +45,13 @@ public class Validator {
     }
 
     private static void validate2(URL originUrl) {
-        if (originUrl.getHost().equals(hostName)) {
-            throw new RuntimeException();
+    	
+    	if(!Pattern.matches(regex, originUrl.toString())){
+    		throw new UrlAvailableException("This URL is not vailable.");
+    	}
+    	
+    	if (originUrl.getHost().equals(hostName)) {
+    		throw new UrlAvailableException("This URL is not vailable.");
         }
     }
 }
