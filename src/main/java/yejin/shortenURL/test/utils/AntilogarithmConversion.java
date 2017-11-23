@@ -41,17 +41,13 @@ public class AntilogarithmConversion {
 		return sb.toString();
 	}
 		
-	/**
-	 * Convert from 62 to 10.
+	 /** Convert from 62 to 10.
 	 * @param shortenIdx
 	 * 
 	 */
 	public static long toDecimal(String shortenIdx) {
 		long longIdx =0;
 
-		System.out.println("asasdasdasdasdasdasd");
-		System.out.println("asasdasdasdasdasdasd");
-		System.out.println("asasdasdasdasdasdasd");
 
 		for(int degree = 0 ; degree <shortenIdx.length() ; degree++){
 			char cipher = shortenIdx.charAt(degree);
@@ -64,7 +60,7 @@ public class AntilogarithmConversion {
 			}else if(97<=cipher && cipher <122){
 				cipherNum = cipher-87;
 			}else{
-				throw new BadInputException();
+				throw new BadInputException("Wrong Shorten Url!");
 			}
 			longIdx += cipherNum * (int)Math.pow(RADIX, shortenIdx.length()-degree-1);
 		}

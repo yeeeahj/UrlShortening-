@@ -59,8 +59,8 @@
 
                     $("#check").html(data.data.shortIdx.toString());
                 },
-                error: function(data){
-                    console.log("result : " + data.data.m);
+                error: function(request, status, error){
+                    alert("result : " + request.status + "\n" + request.responseText);
                 }});
         });
     });

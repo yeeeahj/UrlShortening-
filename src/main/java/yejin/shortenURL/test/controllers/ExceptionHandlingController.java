@@ -51,7 +51,6 @@ public class ExceptionHandlingController {
 		return modelAndView;
 	}
 	
-	
 	@ResponseStatus(org.springframework.http.HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(value = { BadInputException.class})
 	private ModelAndView badInputModelAndView(RuntimeException e){

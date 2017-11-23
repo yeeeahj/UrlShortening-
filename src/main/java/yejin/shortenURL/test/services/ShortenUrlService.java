@@ -32,9 +32,10 @@ public class ShortenUrlService implements ShortenUrlInterface{
 	
 	@Override
 	@Cacheable(value="findMemberCache", key="#idx")
-	public ShortenUrl getOriginUrl(long idx) {
+	public ShortenUrl getOriginUrl(String idx) {
 		// TODO Auto-generated method stub
-		return sur.getOne(idx);
+		long DecimalIdx=AntilogarithmConversion.toDecimal(idx);
+		return sur.findOne(DecimalIdx);
 	}
 
 	@Override

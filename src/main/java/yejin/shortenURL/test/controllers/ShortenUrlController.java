@@ -60,9 +60,10 @@ public class ShortenUrlController {
 	}
 	
 	@GetMapping("/{idx}")
-	public String getOriginUrl(@PathVariable("idx") final long idx){
+	public String getOriginUrl(@PathVariable("idx") final String idx){
 		ShortenUrl shortenUrl = shortenUrlService.getOriginUrl(idx);
 		if(shortenUrl == null){
+			System.out.println("This Shorten Url is not found");
 			throw new RangeOverException("This ShortenUrl is not Exist.");
 		}
 

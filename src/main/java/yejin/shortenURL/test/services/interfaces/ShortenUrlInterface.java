@@ -7,12 +7,11 @@ import yejin.shortenURL.test.domains.ShortenUrl;
  *
  */
 public interface ShortenUrlInterface {
-	public ShortenUrl getOriginUrl(final long idx);
+	public ShortenUrl getOriginUrl(final String idx);
 	
 	public String addOriginUrl(final ShortenUrl OriginUrl);
 	
-	public void deleteOriginUrl(final long idx);
-		
+	public void deleteOriginUrl(long idx);
 	//TODO: extend to list?
 
 }
