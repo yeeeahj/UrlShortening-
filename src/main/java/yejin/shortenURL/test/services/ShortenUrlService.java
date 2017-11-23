@@ -40,8 +40,9 @@ public class ShortenUrlService implements ShortenUrlInterface{
 	@Override
 	public String addOriginUrl(ShortenUrl OriginUrl) {
 
-		Validator.validate(OriginUrl.getOriginUrl());
+		String tempUrl = Validator.validate(OriginUrl.getOriginUrl());
 
+		OriginUrl.setOriginUrl(tempUrl);
 		// TODO Auto-generated method stub
 		ShortenUrl su =sur.save(OriginUrl);
 		

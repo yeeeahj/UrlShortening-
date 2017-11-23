@@ -26,6 +26,7 @@ public class ShortenUrl {
 	 */
 	public ShortenUrl(){
 	}
+
 	public ShortenUrl(String originUrl){
 		this.originUrl = originUrl;
 	}

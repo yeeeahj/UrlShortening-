@@ -15,6 +15,4 @@ public class ViewController {
     public String home(){
         return "/home";
     }
-
-
 }

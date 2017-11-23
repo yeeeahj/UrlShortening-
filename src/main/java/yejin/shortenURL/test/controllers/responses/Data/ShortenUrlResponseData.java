@@ -18,6 +18,6 @@ public class ShortenUrlResponseData {
 	public void setShortIdx(String shortIdx) {
 		this.shortIdx += shortIdx;
 	}
-	
+
 
 }

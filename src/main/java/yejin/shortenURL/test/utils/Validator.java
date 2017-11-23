@@ -13,14 +13,14 @@ public class Validator {
 
     static final String hostName = "localhost";
 	static String regex ="^(https?:\\/\\/)?"
-			+"((([a-z\\d](([a-z\\d-]*[a-z\\d])|([¤¡-ÆR]))*)\\.)+[a-z]{2,}|"
+			+"((([a-z\\d](([a-z\\d-]*[a-z\\d])|([ï¿½ï¿½-ï¿½R]))*)\\.)+[a-z]{2,}|"
 			+"((\\d{1,3}\\.){3}\\d{1,3}))"
 			+"(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*"
 			+"(\\?[;&a-z\\d%_.~+=-]*)?"
 			+"(\\#[-a-z\\d_]*)?$";
 
 
-    public static void validate(String originUrl) {
+    public static String validate(String originUrl) {
         URL tempUrl;
 
         try {
@@ -42,6 +42,8 @@ public class Validator {
         }
 
         validate2(tempUrl);
+
+        return tempUrl.toString();
     }
 
     private static void validate2(URL originUrl) {

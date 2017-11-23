@@ -4,12 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import io.swagger.annotations.Api;
 import yejin.shortenURL.test.commons.NotInputException;
@@ -20,10 +16,12 @@ import yejin.shortenURL.test.controllers.responses.Data.ShortenUrlResponseData;
 import yejin.shortenURL.test.domains.ShortenUrl;
 import yejin.shortenURL.test.services.ShortenUrlService;
 
+import java.net.URI;
+
 /**
  * @author yeeeah_j
 */
-@RestController
+@Controller
 @EnableCaching
 @RequestMapping("shortenUrl")
 @Api
@@ -37,7 +35,9 @@ public class ShortenUrlController {
 	 * @param asuf
 	 * @return
 	 */
+
 	@PostMapping("")
+	@ResponseBody
 	public ResponseEntity<DefaultResponse> addShortenUrl(@RequestBody final AddShortenUrlForm asuf){
 
 		System.out.println("addshorturlr");
@@ -61,8 +61,19 @@ public class ShortenUrlController {
 		if(shortenUrl == null){
 			throw new RangeOverException("This ShortenUrl is not Exist.");
 		}
-		
-		return "redirect:"+shortenUrl.getOriginUrl();
+
+		try {
+			URI uri = new URI(shortenUrl.getOriginUrl());
+
+			System.out.println(uri.normalize());
+			System.out.println(uri.normalize());
+			System.out.println(uri.normalize());
+			System.out.println(uri.normalize());
+
+			return "redirect:" + uri.normalize();
+		} catch (Exception e) {
+			throw new RuntimeException();
+		}
 	}
 	
 }
