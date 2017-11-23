@@ -1,6 +1,7 @@
 package yejin.shortenURL.test.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import yejin.shortenURL.test.services.ShortenUrlService;
  * @author yeeeah_j
 */
 @RestController
+@EnableCaching
 @RequestMapping("shortenUrl")
 @Api
 public class ShortenUrlController {

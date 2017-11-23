@@ -2,6 +2,8 @@ package yejin.shortenURL.test.services;
 
 import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import yejin.shortenURL.test.domains.ShortenUrl;
@@ -24,8 +26,12 @@ import java.net.URL;
 public class ShortenUrlService implements ShortenUrlInterface{
 	@Autowired
 	private ShortenUrlRepository sur;
+
+	@Autowired
+	private CacheManager cacheManager;
 	
 	@Override
+	@Cacheable(value="findMemberCache", key="#idx")
 	public ShortenUrl getOriginUrl(long idx) {
 		// TODO Auto-generated method stub
 		return sur.getOne(idx);
@@ -48,7 +54,4 @@ public class ShortenUrlService implements ShortenUrlInterface{
 		// TODO Auto-generated method stub
 		sur.delete(idx);
 	}
-
-
-	
 }
