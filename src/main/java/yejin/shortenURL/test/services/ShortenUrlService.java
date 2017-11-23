@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import yejin.shortenURL.test.domains.ShortenUrl;
 import yejin.shortenURL.test.repositories.ShortenUrlRepository;
 import yejin.shortenURL.test.services.interfaces.ShortenUrlInterface;
+import yejin.shortenURL.test.utils.AntilogarithmConversion;
 
 /**
  * 
@@ -24,9 +25,12 @@ public class ShortenUrlService implements ShortenUrlInterface{
 	}
 
 	@Override
-	public void addOriginUrl(ShortenUrl OriginUrl) {
+	public String addOriginUrl(ShortenUrl OriginUrl) {
 		// TODO Auto-generated method stub
-		sur.save(OriginUrl);
+		ShortenUrl su =sur.save(OriginUrl);
+		
+		return AntilogarithmConversion.to62(su.getIdx());
+		
 	}
 
 	@Override

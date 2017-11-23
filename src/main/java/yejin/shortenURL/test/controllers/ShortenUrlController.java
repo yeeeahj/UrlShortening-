@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import yejin.shortenURL.test.controllers.forms.AddShortenUrlForm;
 import yejin.shortenURL.test.controllers.responses.DefaultResponse;
+import yejin.shortenURL.test.controllers.responses.Data.ShortenUrlResponseData;
 import yejin.shortenURL.test.domains.ShortenUrl;
 import yejin.shortenURL.test.services.ShortenUrlService;
 
@@ -25,7 +26,7 @@ import yejin.shortenURL.test.services.ShortenUrlService;
 public class ShortenUrlController {
 	
 	@Autowired
-	private ShortenUrlService urls;
+	private ShortenUrlService shortenUrlService;
 	
 	/**
 	 * Methods to add shortenUrl.
@@ -36,15 +37,16 @@ public class ShortenUrlController {
 	public ResponseEntity<DefaultResponse> addShortenUrl(@RequestBody final AddShortenUrlForm asuf){
 		System.out.println(asuf.getOrginUrl());
 		ShortenUrl shortenUrl = new ShortenUrl(asuf.getOrginUrl());
-		urls.addOriginUrl(shortenUrl);
+		ShortenUrlResponseData shortenUrlResponseData = new ShortenUrlResponseData();
+		shortenUrlResponseData.setShortIdx(shortenUrlService.addOriginUrl(shortenUrl));
 		
-		DefaultResponse dr = new DefaultResponse();
+		DefaultResponse dr = new DefaultResponse(shortenUrlResponseData);
 		return new ResponseEntity<>(dr, HttpStatus.OK);
 	}
 	
 	@GetMapping("/{idx}")
 	public String getOriginUrl(@PathVariable("idx") final long idx){
-		ShortenUrl shortenUrl = urls.getOriginUrl(idx);
+		ShortenUrl shortenUrl = shortenUrlService.getOriginUrl(idx);
 		if(shortenUrl == null){
 
 		}

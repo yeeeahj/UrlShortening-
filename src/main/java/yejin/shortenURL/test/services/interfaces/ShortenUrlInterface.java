@@ -9,7 +9,7 @@ import yejin.shortenURL.test.domains.ShortenUrl;
 public interface ShortenUrlInterface {
 	public ShortenUrl getOriginUrl(final long idx);
 	
-	public void addOriginUrl(final ShortenUrl OriginUrl);
+	public String addOriginUrl(final ShortenUrl OriginUrl);
 	
 	public void deleteOriginUrl(final long idx);
 		
