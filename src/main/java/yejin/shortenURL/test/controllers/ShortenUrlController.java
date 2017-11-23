@@ -45,6 +45,9 @@ public class ShortenUrlController {
 	@GetMapping("/{idx}")
 	public String getOriginUrl(@PathVariable("idx") final long idx){
 		ShortenUrl shortenUrl = urls.getOriginUrl(idx);
+		if(shortenUrl == null){
+
+		}
 		
 		return "redirect:"+shortenUrl.getOriginUrl();
 	}
