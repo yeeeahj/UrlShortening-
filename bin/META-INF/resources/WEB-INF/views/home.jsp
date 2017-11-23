@@ -1,71 +1,67 @@
-    <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<!DOCTYPE>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 <head>
-    <script src="https://code.jquery.com/jquery.min.js"></script>
-    <style>
-        .back {
-            background-image: url('');
-            background-size: 100%;
-        }
-        .title_img{
-            margin-top: 89.8px;
-            margin-left:63.2px;
-            margin-right: 62.8px;
+    <title>Now Showing</title>
 
-        }
-        .middle_input {
-            width: 65%;
-            height: 15.6%;
-            font-family: AppleSDGothicNeoI;
-            font-size: 35px;
-            line-height: 1.64;
-            text-align: center;
-            color: #7c7c7c;
-            margin-left: 17.3%;
-            margin-top:13.8%;
-            margin-right: 17.2%;
-        }
-        .bottom_img{
-            width:100%;
-            height:27%;
-            margin: 0 auto;
-            margin-top: 15%;
-            margin-left: 17.6%;
-            margin-right: 16%;
-        }
-        .center{
-            width: 70%;
-        }
-
-        .a{
-            margin: 0 auto;
-            padding-bottom: 5%;
-        }
-    </style>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.x-git.min.js"></script>
 </head>
-<body class="back">
-<div class="title_img">
-    <img src="logo.png" width="100%"/>
-</div>
-<div class="middle_input">
-    감정약꾹은<br/>
-    바쁜 일상에서 자신의 감정을<br/>
-    돌보기 힘든 사람들을 대상으로,<br/>
-    그들의 감정에 처방전을 제공하는<br/>
-    라이트하고 재미있는 서비스입니다.
-</div>
-<div class="bottom_img">
-    <div class="a">
-        <img src="main_button-01.png" class="center" id="move"/>
-    </div>
-</div>
-<script>
-    $(function(){
-        $('#move').click(function(){
-            var url = "picture";
-            location.href = url;
+
+<body>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="row">
+                <div class="col-xs-4">
+                    <input type="text" name="keyword" id="originUrl" value="${ cri.keyword }">
+                    <button id="changeBtn">변환</button>
+                </div>
+                <div class="col-xs-8">
+                    <h2 class="post-title">title</h2>
+                    <label id="check"></label>
+                    <hr style="border-color: black">
+                    <h3 class="post-subtitle" id="shortenUrl">
+                        ㅇㅇㅇㅇㅇㅇㅇ
+                    </h3>
+                    <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on September 24, 2014</p>
+                </div>
+            </div>
+        </div>
+    </div> <!-- /.row -->
+</div><!-- /.container -->
+
+<!-- jQuery -->
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        console.log("asdf");
+
+        $("#changeBtn").on("click", function(){
+            var originUrl = $("#originUrl").val();
+            console.log('a');
+
+            $.ajax({
+                type: 'post',
+                url: '/shortenUrl',
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-HTTP-Method-Override": "POST" },
+                data: JSON.stringify({originUrl: originUrl}),
+                dataType: 'json',
+                success: function(data){
+                    console.log("result : " + data);
+                    console.log("result : " + data.data.shortIdx);
+
+                    $("#check").html(data.data.shortIdx.toString());
+                },
+                error: function(data){
+                    console.log("result : " + data.data.m);
+                }});
         });
     });
 </script>

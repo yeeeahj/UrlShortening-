@@ -13,7 +13,7 @@ public class Validator {
 
     static final String hostName = "localhost";
 	static String regex ="^(https?:\\/\\/)?"
-			+"((([a-z\\d](([a-z\\d-]*[a-z\\d])|([ï¿½ï¿½-ï¿½R]))*)\\.)+[a-z]{2,}|"
+			+"((([a-z\\d](([a-z\\d-]*[a-z\\d])|([¤¡-ÆR]))*)\\.)+[a-z]{2,}|"
 			+"((\\d{1,3}\\.){3}\\d{1,3}))"
 			+"(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*"
 			+"(\\?[;&a-z\\d%_.~+=-]*)?"
