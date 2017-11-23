@@ -35,6 +35,11 @@ public class ShortenUrlController {
 	 */
 	@PostMapping("")
 	public ResponseEntity<DefaultResponse> addShortenUrl(@RequestBody final AddShortenUrlForm asuf){
+
+		if(asuf.getOrginUrl() == null) {
+			throw new RuntimeException();
+		}
+
 		System.out.println(asuf.getOrginUrl());
 		ShortenUrl shortenUrl = new ShortenUrl(asuf.getOrginUrl());
 		ShortenUrlResponseData shortenUrlResponseData = new ShortenUrlResponseData();

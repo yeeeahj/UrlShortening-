@@ -1,5 +1,6 @@
 package yejin.shortenURL.test.services;
 
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,6 +8,12 @@ import yejin.shortenURL.test.domains.ShortenUrl;
 import yejin.shortenURL.test.repositories.ShortenUrlRepository;
 import yejin.shortenURL.test.services.interfaces.ShortenUrlInterface;
 import yejin.shortenURL.test.utils.AntilogarithmConversion;
+import yejin.shortenURL.test.utils.Validator;
+
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 /**
  * 
@@ -26,6 +33,9 @@ public class ShortenUrlService implements ShortenUrlInterface{
 
 	@Override
 	public String addOriginUrl(ShortenUrl OriginUrl) {
+
+		Validator.validate(OriginUrl.getOriginUrl());
+
 		// TODO Auto-generated method stub
 		ShortenUrl su =sur.save(OriginUrl);
 		
